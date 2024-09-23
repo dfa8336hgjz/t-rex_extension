@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Character
-  - 
+  - Effect
   - 
   - 
   - 
@@ -40,10 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 2713105979
-    locked: 0
-  - name: Character
-    uniqueID: 2494519997
     locked: 0
