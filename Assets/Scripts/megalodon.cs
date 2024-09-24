@@ -19,4 +19,9 @@ public class megalodon : MonoBehaviour
             rb.velocity -= new Vector2(0, moveForce);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        MegalodonGameManager.Instance.endGame();
+    }
 }
