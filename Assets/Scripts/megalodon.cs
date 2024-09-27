@@ -22,6 +22,7 @@ public class megalodon : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        MegalodonGameManager.Instance.endGame();
+        if(collision.gameObject.tag != "Barrier")
+            MegalodonGameManager.Instance.endGame();
     }
 }

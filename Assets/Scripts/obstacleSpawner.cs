@@ -14,8 +14,11 @@ public class obstacleSpawner : MonoBehaviour
 
     private void spawn()
     {
-        int i = Random.Range(0, obstacle.Length);
-        GameObject o = Instantiate(obstacle[i], transform.position, Quaternion.identity);
-        o.transform.position = transform.position;
+        if (!MegalodonGameManager.Instance.IsSceneEnd())
+        {
+            int i = Random.Range(0, obstacle.Length * 10);
+            GameObject o = Instantiate(obstacle[i%obstacle.Length], transform.position, Quaternion.identity);
+            o.transform.position = transform.position;
+        }
     }
 }

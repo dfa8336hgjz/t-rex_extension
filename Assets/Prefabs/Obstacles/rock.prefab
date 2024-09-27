@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7455976268219909935}
   - component: {fileID: 8635161103210854361}
-  - component: {fileID: 1722754877078658371}
   - component: {fileID: 4107972908690141659}
+  - component: {fileID: 2255082460227101254}
   m_Layer: 0
   m_Name: rock
   m_TagString: Untagged
@@ -86,7 +86,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1722754877078658371
+--- !u!114 &4107972908690141659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3660214717692780991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dcf64273846c8e44a176c9c6990dd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+--- !u!61 &2255082460227101254
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11362994, y: -2.5329058}
+  m_Offset: {x: 0.18649244, y: -2.4964979}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.44467792, y: 0.80740345}
@@ -129,18 +142,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.6791542, y: 6.7714877}
+  m_Size: {x: 2.9685192, y: 6.1994967}
   m_EdgeRadius: 0
---- !u!114 &4107972908690141659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3660214717692780991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dcf64273846c8e44a176c9c6990dd50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
