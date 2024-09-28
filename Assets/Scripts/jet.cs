@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class Jet : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb2D;
     [SerializeField] float jumpForce;

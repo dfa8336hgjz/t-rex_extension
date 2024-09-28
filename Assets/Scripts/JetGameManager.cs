@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class JetGameManager : MonoBehaviour
 {
     public static JetGameManager instance;
-    public Bird player;
+    public Jet player;
     public Spawner spawner;
     public int score;
 
@@ -51,10 +51,10 @@ public class JetGameManager : MonoBehaviour
     public void GameOver()
     {
         PlayButton.gameObject.SetActive(true);
-        foreach(GameObject pipe in spawner.spawnedPipes)
+        foreach(GameObject building in spawner.spawnedPipes)
         {
-            if (pipe != null)
-                Destroy(pipe);
+            if (building != null)
+                Destroy(building);
         }
         Pause();
     }

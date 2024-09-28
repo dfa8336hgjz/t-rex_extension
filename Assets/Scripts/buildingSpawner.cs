@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Pipe prefab;
+    public Building prefab;
     public float spawnrate = 1f;
     public float minheight = -1f;
     public float maxheight = 2f;
@@ -17,8 +17,8 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        Pipe newpipe = Instantiate(prefab, transform.position, Quaternion.identity);
-        newpipe.transform.position += Vector3.up * Random.Range(minheight, maxheight);
-        spawnedPipes.Add(newpipe.gameObject);
+        Building newbuilding = Instantiate(prefab, transform.position, Quaternion.identity);
+        newbuilding.transform.position += Vector3.up * Random.Range(minheight, maxheight);
+        spawnedPipes.Add(newbuilding.gameObject);
     }
 }
