@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ccf377b7ce3c440a50d887fbba8cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: -8285086777683602519, guid: aa7d002f4b6f7bb4b8a6189f870d267f, type: 3}
+  prefab: {fileID: -8285086777683602519, guid: f2bde3ab7235aae4db303681b63be3a1, type: 3}
   spawnrate: 1
   minheight: -1
   maxheight: 2
