@@ -4,9 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class JetGameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static JetGameManager instance;
     public Bird player;
     public Spawner spawner;
     public int score;

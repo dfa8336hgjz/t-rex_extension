@@ -18,12 +18,12 @@ public class Bird : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager.instance.GameOver();
+        JetGameManager.instance.GameOver();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "ScoreTrigger")
-            GameManager.instance.UpdateScore();
+            JetGameManager.instance.UpdateScore();
     }
 }
