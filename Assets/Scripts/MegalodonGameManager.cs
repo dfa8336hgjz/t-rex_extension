@@ -31,7 +31,7 @@ public class MegalodonGameManager : MonoBehaviour
         else
         {
             time -= Time.deltaTime * runSpeed;
-            eraTimeText.text = "Pliocene: " + System.Math.Round(time, 2) + " millions year ago";
+            eraTimeText.text = "Pliocene: " + System.Math.Round(time, 2) + " million years ago";
         }
     }
 
