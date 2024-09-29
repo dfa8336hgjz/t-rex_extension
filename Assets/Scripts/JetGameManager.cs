@@ -44,7 +44,7 @@ public class JetGameManager : MonoBehaviour
         scoretext.text = score.ToString();
         Time.timeScale = 1;
         player.gameObject.SetActive(true);
-        player.transform.position = Vector3.zero;
+        player.transform.position = new Vector3(1,0,0);
         spawner.gameObject.SetActive(true);
     }
 
