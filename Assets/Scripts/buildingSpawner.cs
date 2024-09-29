@@ -8,7 +8,9 @@ public class Spawner : MonoBehaviour
     public float spawnrate = 1f;
     public float minheight = -1f;
     public float maxheight = 2f;
-    public List<GameObject> spawnedPipes = new List<GameObject>();
+    public List<GameObject> spawnedBuildings = new List<GameObject>();
+
+    private bool isSpawning = true;  // Flag for spawning control
 
     private void Start()
     {
@@ -16,15 +18,23 @@ public class Spawner : MonoBehaviour
     }
 
     private void Spawn()
-    {    
-        Building newbuilding = Instantiate(prefab, transform.position, Quaternion.identity);
-        newbuilding.transform.position += Vector3.up * Random.Range(minheight, maxheight);
-        spawnedPipes.Add(newbuilding.gameObject); 
+    {
+        if (isSpawning)
+        {
+            Building newbuilding = Instantiate(prefab, transform.position, Quaternion.identity);
+            newbuilding.transform.position += Vector3.up * Random.Range(minheight, maxheight);
+            spawnedBuildings.Add(newbuilding.gameObject);
+        }
     }
 
-    public void StopSpawning() // Method to stop spawning
+    public void StopSpawning()
     {
-        CancelInvoke("Spawn");
+        isSpawning = false;
+    }
+
+    // Add a method to resume spawning
+    public void ResumeSpawning()
+    {
+        isSpawning = true;
     }
 }
-
