@@ -16,9 +16,15 @@ public class Spawner : MonoBehaviour
     }
 
     private void Spawn()
-    {
+    {    
         Building newbuilding = Instantiate(prefab, transform.position, Quaternion.identity);
         newbuilding.transform.position += Vector3.up * Random.Range(minheight, maxheight);
-        spawnedPipes.Add(newbuilding.gameObject);
+        spawnedPipes.Add(newbuilding.gameObject); 
+    }
+
+    public void StopSpawning() // Method to stop spawning
+    {
+        CancelInvoke("Spawn");
     }
 }
+

@@ -28,6 +28,12 @@ public class JetGameManager : MonoBehaviour
     {
         score++;
         scoretext.text = score.ToString();
+
+        // Stop spawning buildings when the score reaches
+        if (score >= 10)
+        {
+            spawner.StopSpawning(); // Stop spawning
+        }
     }
 
     public void Pause()
