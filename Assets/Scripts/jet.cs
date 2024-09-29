@@ -21,9 +21,9 @@ public class Jet : MonoBehaviour
         JetGameManager.instance.GameOver();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "ScoreTrigger")
-            JetGameManager.instance.UpdateScore();
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "ScoreTrigger")
+    //        JetGameManager.instance.UpdateScore();
+    //}
 }
