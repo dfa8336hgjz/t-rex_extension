@@ -323,8 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9905af7c1f559e4b99c7d82437088d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 8
-  gravity: 15
+  jumpForce: 12
+  gravity: 30
 --- !u!143 &80711433
 CharacterController:
   m_ObjectHideFlags: 0
@@ -899,6 +899,7 @@ MonoBehaviour:
   hiscoreText: {fileID: 1448126773}
   gameOverText: {fileID: 1968322440}
   retryButton: {fileID: 1335912782}
+  spawner: {fileID: 1311032698}
 --- !u!1 &684783421
 GameObject:
   m_ObjectHideFlags: 0

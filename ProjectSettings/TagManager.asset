@@ -3,24 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - Barrier
-  - ScoreTrigger
-  - Obstacle
-=======
-  - WTC
-  - ScoreTrigger
->>>>>>> 2710f9f6c47fcc998ada2f7e9b633d8c0f608c19
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Character
-  - Effect
+  - 
+  - 
   - 
   - 
   - 

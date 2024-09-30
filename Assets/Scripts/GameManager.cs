@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Game.Scene1;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
@@ -17,9 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hiscoreText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button retryButton;
+    [SerializeField] private Spawner spawner;
 
     private Player player;
-    private Spawner spawner;
 
     private float score;
     public float Score => score;
@@ -47,7 +48,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
-        spawner = FindObjectOfType<Spawner>();
 
         NewGame();
     }

@@ -9,7 +9,7 @@ public class JetGameManager : MonoBehaviour
 {
     public static JetGameManager instance;
     public Jet player;
-    public Spawner spawner;
+    public buildingSpawner spawner;
     public GameObject WTCPrefab; // Keep the prefab reference
     private GameObject WTCInstance; // Variable to hold the instantiated WTC
     public int score;
