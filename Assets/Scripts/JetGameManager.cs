@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Threading;
+using UnityEngine.SceneManagement;
 
 public class JetGameManager : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class JetGameManager : MonoBehaviour
     public int score;
 
     [SerializeField] TMP_Text scoretext;
-    [SerializeField] Button PlayButton;
+    //[SerializeField] Button PlayButton;
+    [SerializeField] TextMeshProUGUI gameOverText;
+    [SerializeField] Button retryButton;
 
     float time;
     public float runSpeed = 10f;
@@ -26,12 +29,14 @@ public class JetGameManager : MonoBehaviour
     {
         instance = this;
         time = START_TIME;
-        PlayButton.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        Pause();
+        // Pause();
+        StartGame();
     }
 
     public void Update()
@@ -56,7 +61,7 @@ public class JetGameManager : MonoBehaviour
         // Instantiate WTC when the score reaches
         if (time == 2001 && WTCInstance == null) // Check if WTC is not already instantiated
         {
-            WTCInstance = Instantiate(WTCPrefab, new Vector3(30, -0.1f, 0), Quaternion.identity);
+            WTCInstance = Instantiate(WTCPrefab, new Vector3(15, -0.1f, 0), Quaternion.identity);
         }
     }
 
@@ -69,7 +74,7 @@ public class JetGameManager : MonoBehaviour
 
     public void StartGame()
     {
-        PlayButton.gameObject.SetActive(false);
+        //PlayButton.gameObject.SetActive(false);
         Time.timeScale = 1;
         player.gameObject.SetActive(true);
         player.transform.position = new Vector3(1, 0, 0);
@@ -79,15 +84,17 @@ public class JetGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        PlayButton.gameObject.SetActive(true);
+        //PlayButton.gameObject.SetActive(true);
 
-        Thread.Sleep(1000); // Pause 1 second
+        Time.timeScale = 0;
+        gameOverText.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
 
-        Pause();
+        //Pause();
 
-        time = START_TIME;
+        //time = START_TIME;
 
-        // Destroy all spawned buildings
+        /*// Destroy all spawned buildings
         foreach (GameObject building in spawner.spawnedBuildings)
         {
             if (building != null)
@@ -99,6 +106,12 @@ public class JetGameManager : MonoBehaviour
         {
             Destroy(WTCInstance);
             WTCInstance = null; // Reset the instance reference
-        }
+        }*/
+    }
+
+    public void NewGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("T-Rex Scene");
     }
 }
