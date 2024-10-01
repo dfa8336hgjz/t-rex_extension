@@ -13,14 +13,15 @@ public class JetGameManager : MonoBehaviour
     public buildingSpawner spawner;
     public GameObject WTCPrefab; // Keep the prefab reference
     private GameObject WTCInstance; // Variable to hold the instantiated WTC
-    public int score;
+    //public int score;
 
-    [SerializeField] TMP_Text scoretext;
+    [SerializeField] TMP_Text scoreText;
     //[SerializeField] Button PlayButton;
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] Button retryButton;
 
     float time;
+    private float score;
     public float runSpeed = 10f;
     public float START_TIME = 1914f;
     public float END_TIME = 2001f;
@@ -37,11 +38,14 @@ public class JetGameManager : MonoBehaviour
     {
         // Pause();
         StartGame();
+        //Thread.Sleep(1000);
     }
 
     public void Update()
     {
         time += Time.deltaTime * runSpeed;
+        score = time;
+        scoreText.text = Mathf.FloorToInt(score).ToString("D5");
 
         // Ensure that time doesn't go past the END_TIME
         if (time >= END_TIME)
@@ -50,7 +54,7 @@ public class JetGameManager : MonoBehaviour
         }
 
         // Display the time (year) in the score text
-        scoretext.text = "Holocene: Year " + Mathf.FloorToInt(time).ToString();
+        //scoretext.text = "Holocene: Year " + Mathf.FloorToInt(time).ToString();
 
         // Stop spawning buildings when the score reaches
         if (time >= 1990)

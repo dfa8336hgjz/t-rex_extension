@@ -11,15 +11,17 @@ using UnityEngine.UI;
 public class MegalodonGameManager : MonoBehaviour
 {
     public static MegalodonGameManager Instance;
-    [SerializeField] TextMeshProUGUI endgameText;
+    //[SerializeField] TextMeshProUGUI endgameText;
+    [SerializeField] TMP_Text scoreText;
     //[SerializeField] Button restartBtn;
     [SerializeField] SpriteRenderer scenePassBackground;
-    [SerializeField] TextMeshProUGUI eraTimeText;
+    //[SerializeField] TextMeshProUGUI eraTimeText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button retryButton;
 
     float time;
     public float runSpeed;
+    private float score;
     public float START_TIME = 5.33f;
     public float END_TIME = 2.58f;
     private void Start()
@@ -28,6 +30,7 @@ public class MegalodonGameManager : MonoBehaviour
         time = START_TIME;
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -39,7 +42,9 @@ public class MegalodonGameManager : MonoBehaviour
         else
         {
             time -= Time.deltaTime * runSpeed;
-            eraTimeText.text = "Pliocene: " + System.Math.Round(time, 2) + " million years ago";
+            score = time;
+            //scoreText.text = Mathf.FloorToInt(score).ToString("D7");
+            scoreText.text = score.ToString("F4");
         }
     }
 
