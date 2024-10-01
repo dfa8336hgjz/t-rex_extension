@@ -902,6 +902,8 @@ MonoBehaviour:
   gameOverText: {fileID: 1968322440}
   retryButton: {fileID: 1335912782}
   spawner: {fileID: 1311032698}
+  mainCamera: {fileID: 519420031}
+  asteroidPrefab: {fileID: 5142748055382531337, guid: 58578e4790ebc594bbfe77398bbfbda0, type: 3}
 --- !u!1 &684783421
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Game.Scene1;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
@@ -16,15 +17,17 @@ public class GameManager : MonoBehaviour
     public float START_TIME = 72.7f;
     public float END_TIME = 66.0f;
     public float time;
+    private float bottomEdge;
     public float gameSpeed { get; private set; }
 
     [SerializeField] private TextMeshProUGUI scoreText;
-    //[SerializeField] private TextMeshProUGUI hiscoreText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button retryButton;
     [SerializeField] private Spawner spawner;
 
     private Player player;
+    public GameObject asteroidPrefab; // Keep the prefab reference
+    private GameObject asteroidInstance; // Variable to hold the instantiated asteroid
 
     private float score;
     public float Score => score;
@@ -66,7 +69,14 @@ public class GameManager : MonoBehaviour
             Destroy(obstacle.gameObject);
         }
 
-        score = 0f;
+        if (asteroidInstance != null)
+        {
+            Destroy(asteroidInstance);
+            asteroidInstance = null; // Optional: Clear the reference
+        }
+
+        time = START_TIME;
+        player.transform.position = new Vector3(-7.85f, 1, 0);
         gameSpeed = initialGameSpeed;
         enabled = true;
 
@@ -74,8 +84,6 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
-
-        //UpdateHiscore();
     }
 
     public void GameOver()
@@ -87,48 +95,61 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
-
-        //UpdateHiscore();
     }
 
     private void Update()
     {
-        if (time < END_TIME)
+        if (time <= END_TIME)
         {
-            triggerEndScene();
+            time = END_TIME;
+
+            if (asteroidInstance == null)
+            {
+                asteroidInstance = Instantiate(asteroidPrefab, new Vector2(9, 6), Quaternion.identity);
+            }
+
+            bottomEdge = -12f;
+
+            if (asteroidInstance.transform.position.x < bottomEdge)
+            {
+                // Freeze the asteroid's position by making its Rigidbody2D kinematic
+                Rigidbody2D rb = asteroidInstance.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.isKinematic = true; // Freeze the physics behavior
+                }
+                StartCoroutine(ScaleAsteroid());
+
+                if (asteroidInstance.transform.localScale.x >= 9f)
+                {
+                    triggerEndScene();
+                }
+            }
         }
         else
         {
             gameSpeed += gameSpeedIncrease * Time.deltaTime;
-            time -= initialGameSpeed * 0.05f * Time.deltaTime;
+            time -= initialGameSpeed * 0.1f * Time.deltaTime;
             score = time;
             scoreText.text = score.ToString("F4");
         }
     }
 
-    public void triggerEndScene()
+    private IEnumerator ScaleAsteroid()
     {
-        Time.timeScale = 0;
-        /*Color color = scenePassBackground.color;
-        if (color.a < 0.3f)
+        // Gradually scale the x component of the asteroid to 10
+        Vector3 targetScale = new Vector3(10f, 10f, asteroidInstance.transform.localScale.z);
+        while (asteroidInstance.transform.localScale.x < 9f)
         {
-            color.a += 0.002f;
-            scenePassBackground.color = color;
-        }*/
-        SceneManager.LoadScene("MegalodonScene");
+            asteroidInstance.transform.localScale = Vector3.Lerp(asteroidInstance.transform.localScale, targetScale, 0.04f * Time.deltaTime);
+            yield return null; // Wait for the next frame
+        }
     }
 
-    /*private void UpdateHiscore()
+    public void triggerEndScene()
     {
-        float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
-
-        if (score > hiscore)
-        {
-            hiscore = score;
-            PlayerPrefs.SetFloat("hiscore", hiscore);
-        }
-
-        hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
-    }*/
-
+        Thread.Sleep(1000);
+        Time.timeScale = 0;
+        SceneManager.LoadScene("MegalodonScene");
+    }
 }
