@@ -13,6 +13,8 @@ public class JetGameManager : MonoBehaviour
     public buildingSpawner spawner;
     public GameObject WTCPrefab; // Keep the prefab reference
     private GameObject WTCInstance; // Variable to hold the instantiated WTC
+    public GameObject explosionPrefab; // Keep the prefab reference
+    private GameObject explosionInstance;
     //public int score;
     public bool isStart = false;
 
@@ -106,5 +108,26 @@ public class JetGameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("T-Rex Scene");
+    }
+
+    public void triggerExplosion()
+    {
+        Vector3 playerPosition = player.transform.position;
+        explosionInstance = Instantiate(explosionPrefab, playerPosition, Quaternion.identity);
+        StartCoroutine(ScaleExplosion());
+    }
+
+    private IEnumerator ScaleExplosion()
+    {
+        // Gradually scale the x component of the asteroid to 10
+        Vector3 targetScale = new Vector3(16f, 16f, explosionInstance.transform.localScale.z);
+        while (explosionInstance.transform.localScale.x < 15f)
+        {
+            explosionInstance.transform.localScale = Vector3.Lerp(explosionInstance.transform.localScale, targetScale, 1f * Time.deltaTime);
+            yield return null; // Wait for the next frame
+        }
+        Time.timeScale = 0;
+        gameOverText.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
     }
 }

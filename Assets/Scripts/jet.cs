@@ -18,7 +18,15 @@ public class Jet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        JetGameManager.instance.GameOver();
+        if (collision.gameObject.CompareTag("WTC")) // Ensure the WTC has the tag "WTC"
+        {
+            JetGameManager.instance.triggerExplosion();
+        }
+
+        else
+        {
+            JetGameManager.instance.GameOver();
+        }
     }
 
     public void setGravityOn()
