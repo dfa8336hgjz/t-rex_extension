@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviour
 
     public float initialGameSpeed = 5f;
     public float gameSpeedIncrease = 0.1f;
+    public float START_TIME = 72.7f;
+    public float END_TIME = 66.0f;
+    public float time;
     public float gameSpeed { get; private set; }
 
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI hiscoreText;
+    //[SerializeField] private TextMeshProUGUI hiscoreText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button retryButton;
     [SerializeField] private Spawner spawner;
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            time = START_TIME;
             Instance = this;
         }
     }
@@ -49,7 +53,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
-
+        time = START_TIME;
         NewGame();
     }
 
@@ -71,7 +75,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
 
-        UpdateHiscore();
+        //UpdateHiscore();
     }
 
     public void GameOver()
@@ -84,17 +88,37 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
 
-        UpdateHiscore();
+        //UpdateHiscore();
     }
 
     private void Update()
     {
-        gameSpeed += gameSpeedIncrease * Time.deltaTime;
-        score += gameSpeed * Time.deltaTime;
-        scoreText.text = Mathf.FloorToInt(score).ToString("D5");
+        if (time < END_TIME)
+        {
+            triggerEndScene();
+        }
+        else
+        {
+            gameSpeed += gameSpeedIncrease * Time.deltaTime;
+            time -= initialGameSpeed * 0.05f * Time.deltaTime;
+            score = time;
+            scoreText.text = score.ToString("F4");
+        }
     }
 
-    private void UpdateHiscore()
+    public void triggerEndScene()
+    {
+        Time.timeScale = 0;
+        /*Color color = scenePassBackground.color;
+        if (color.a < 0.3f)
+        {
+            color.a += 0.002f;
+            scenePassBackground.color = color;
+        }*/
+        SceneManager.LoadScene("MegalodonScene");
+    }
+
+    /*private void UpdateHiscore()
     {
         float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
 
@@ -105,6 +129,6 @@ public class GameManager : MonoBehaviour
         }
 
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
-    }
+    }*/
 
 }
