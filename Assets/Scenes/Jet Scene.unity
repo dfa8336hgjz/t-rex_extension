@@ -629,6 +629,7 @@ MonoBehaviour:
   player: {fileID: 119177170}
   spawner: {fileID: 725915293}
   WTCPrefab: {fileID: 2756649196730809874, guid: dbe8359ca5bd73240bbe6d9074037701, type: 3}
+  explosionPrefab: {fileID: 264792848761838114, guid: 437729a689a7ebc43924ec2bfa3906f0, type: 3}
   scoreText: {fileID: 981454526}
   gameOverText: {fileID: 1149295476}
   retryButton: {fileID: 1854826799}

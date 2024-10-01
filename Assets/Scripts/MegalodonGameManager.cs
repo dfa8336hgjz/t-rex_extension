@@ -81,6 +81,7 @@ public class MegalodonGameManager : MonoBehaviour
 
     public void NewGame()
     {
+        Thread.Sleep(1000);
         Time.timeScale = 1;
         SceneManager.LoadScene("T-Rex Scene");
     }

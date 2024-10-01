@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
             if (asteroidInstance == null)
             {
-                asteroidInstance = Instantiate(asteroidPrefab, new Vector2(9, 6), Quaternion.identity);
+                asteroidInstance = Instantiate(asteroidPrefab, new Vector2(12, 8), Quaternion.identity);
             }
 
             bottomEdge = -12f;
