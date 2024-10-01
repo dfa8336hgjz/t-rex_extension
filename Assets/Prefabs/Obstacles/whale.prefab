@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9031015387097456985}
   - component: {fileID: 258314860860445693}
   - component: {fileID: 3433758307353203869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: whale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcf64273846c8e44a176c9c6990dd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
 --- !u!60 &3433758307353203869
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -7,18 +7,20 @@ public class obstacleSpawner : MonoBehaviour
     [SerializeField] private GameObject[] obstacle;
     [SerializeField] private float spawnTime;
     // Start is called before the first frame update
-    void Start()
+    private bool startInvoking = false;
+
+    private void Update()
     {
-        InvokeRepeating(nameof(spawn), 1.0f, spawnTime);
+        if(MegalodonGameManager.Instance.IsGameStart() && !startInvoking) {
+            InvokeRepeating(nameof(spawn), 0.0f, spawnTime);
+            startInvoking = true;
+        }
     }
 
     private void spawn()
     {
-        if (!MegalodonGameManager.Instance.IsSceneEnd())
-        {
-            int i = Random.Range(0, obstacle.Length * 10);
-            GameObject o = Instantiate(obstacle[i%obstacle.Length], transform.position, Quaternion.identity);
-            o.transform.position = transform.position;
-        }
+        int i = Random.Range(0, obstacle.Length * 10);
+        GameObject o = Instantiate(obstacle[i%obstacle.Length], transform.position, Quaternion.identity);
+        o.transform.position = transform.position;
     }
 }

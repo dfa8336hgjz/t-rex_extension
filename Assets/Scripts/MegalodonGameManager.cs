@@ -18,12 +18,15 @@ public class MegalodonGameManager : MonoBehaviour
     //[SerializeField] TextMeshProUGUI eraTimeText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button retryButton;
+    [SerializeField] private Image guideImg;
 
     float time;
     public float runSpeed;
     private float score;
     public float START_TIME = 5.33f;
     public float END_TIME = 2.58f;
+    private bool isStart = false;
+
     private void Start()
     {
         Instance = this;
@@ -35,35 +38,40 @@ public class MegalodonGameManager : MonoBehaviour
 
     private void Update()
     {
-        if(time < END_TIME)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)) && !isStart)
         {
-            triggerEndScene();
+            isStart = true;
+            guideImg.gameObject.SetActive(false);
         }
-        else
+        if (isStart)
         {
-            time -= Time.deltaTime * runSpeed;
-            score = time;
-            //scoreText.text = Mathf.FloorToInt(score).ToString("D7");
-            scoreText.text = score.ToString("F4");
+            if (time < END_TIME)
+            {
+                triggerEndScene();
+            }
+            else
+            {
+                time -= Time.deltaTime * runSpeed;
+                score = time;
+                scoreText.text = score.ToString("F4");
+            }
         }
     }
 
     public void endGame()
     {
-        //endgameText.text = "You died!";
         Time.timeScale = 0;
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
-        //SceneManager.LoadScene("T-Rex Scene");
     }
 
     public void triggerEndScene()
     {
         Time.timeScale = 0;
         Color color = scenePassBackground.color;
-        if (color.a < 0.3f)
+        if (color.a < 1.0f)
         {
-            color.a += 0.002f;
+            color.a += 0.0008f;
             scenePassBackground.color = color;
         }
 
@@ -74,14 +82,9 @@ public class MegalodonGameManager : MonoBehaviour
         }
     }
 
-    public bool IsSceneEnd()
+    public bool IsGameStart()
     {
-        return time < END_TIME;
+        return isStart;
     }
 
-    public void NewGame()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("T-Rex Scene");
-    }
 }

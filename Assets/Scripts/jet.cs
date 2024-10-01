@@ -21,6 +21,16 @@ public class Jet : MonoBehaviour
         JetGameManager.instance.GameOver();
     }
 
+    public void setGravityOn()
+    {
+        rb2D.gravityScale = 1;
+    }
+
+    public void setGravityOff()
+    {
+        rb2D.gravityScale = 0;
+    }
+
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    if (collision.tag == "ScoreTrigger")

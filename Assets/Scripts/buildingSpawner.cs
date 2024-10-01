@@ -10,11 +10,17 @@ public class buildingSpawner : MonoBehaviour
     public float maxheight = 2f;
     public List<GameObject> spawnedBuildings = new List<GameObject>();
 
-    private bool isSpawning = true;  // Flag for spawning control
+    private bool isSpawning = false;  // Flag for spawning control
+    private bool spawnStarted = false;
 
-    private void Start()
+    private void Update()
     {
-        InvokeRepeating(nameof(Spawn), spawnrate, spawnrate);
+        if (JetGameManager.instance.isStart && !isSpawning && !spawnStarted)
+        {
+            InvokeRepeating(nameof(Spawn), 0.0f, spawnrate);
+            isSpawning = true;
+            spawnStarted = true;
+        }
     }
 
     private void Spawn()

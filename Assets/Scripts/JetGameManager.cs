@@ -14,11 +14,13 @@ public class JetGameManager : MonoBehaviour
     public GameObject WTCPrefab; // Keep the prefab reference
     private GameObject WTCInstance; // Variable to hold the instantiated WTC
     //public int score;
+    public bool isStart = false;
 
     [SerializeField] TMP_Text scoreText;
     //[SerializeField] Button PlayButton;
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] Button retryButton;
+    [SerializeField] SpriteRenderer guideImg;
 
     float time;
     private float score;
@@ -36,36 +38,43 @@ public class JetGameManager : MonoBehaviour
 
     private void Start()
     {
-        // Pause();
         StartGame();
-        //Thread.Sleep(1000);
     }
 
     public void Update()
     {
-        time += Time.deltaTime * runSpeed;
-        score = time;
-        scoreText.text = Mathf.FloorToInt(score).ToString("D5");
-
-        // Ensure that time doesn't go past the END_TIME
-        if (time >= END_TIME)
+        if (Input.GetKeyDown(KeyCode.Space) && !isStart)
         {
-            time = END_TIME;
+            isStart = true;
+            player.setGravityOn();
+            guideImg.gameObject.SetActive(false);
         }
-
-        // Display the time (year) in the score text
-        //scoretext.text = "Holocene: Year " + Mathf.FloorToInt(time).ToString();
-
-        // Stop spawning buildings when the score reaches
-        if (time >= 1990)
+        if(isStart)
         {
-            spawner.StopSpawning(); // Stop spawning
-        }
+            time += Time.deltaTime * runSpeed;
+            score = time;
+            scoreText.text = Mathf.FloorToInt(score).ToString("D5");
 
-        // Instantiate WTC when the score reaches
-        if (time == 2001 && WTCInstance == null) // Check if WTC is not already instantiated
-        {
-            WTCInstance = Instantiate(WTCPrefab, new Vector3(15, -0.1f, 0), Quaternion.identity);
+            // Ensure that time doesn't go past the END_TIME
+            if (time >= END_TIME)
+            {
+                time = END_TIME;
+            }
+
+            // Display the time (year) in the score text
+            //scoretext.text = "Holocene: Year " + Mathf.FloorToInt(time).ToString();
+
+            // Stop spawning buildings when the score reaches
+            if (time >= 1990)
+            {
+                spawner.StopSpawning(); // Stop spawning
+            }
+
+            // Instantiate WTC when the score reaches
+            if (time == 2001 && WTCInstance == null) // Check if WTC is not already instantiated
+            {
+                WTCInstance = Instantiate(WTCPrefab, new Vector3(15, -0.1f, 0), Quaternion.identity);
+            }
         }
     }
 
@@ -81,36 +90,16 @@ public class JetGameManager : MonoBehaviour
         //PlayButton.gameObject.SetActive(false);
         Time.timeScale = 1;
         player.gameObject.SetActive(true);
-        player.transform.position = new Vector3(1, 0, 0);
+        player.transform.position = new Vector3(-3, 0, 0);
+        player.setGravityOff();
         spawner.gameObject.SetActive(true);
-        spawner.ResumeSpawning();
     }
 
     public void GameOver()
     {
-        //PlayButton.gameObject.SetActive(true);
-
         Time.timeScale = 0;
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
-
-        //Pause();
-
-        //time = START_TIME;
-
-        /*// Destroy all spawned buildings
-        foreach (GameObject building in spawner.spawnedBuildings)
-        {
-            if (building != null)
-                Destroy(building);
-        }
-
-        // Destroy the WTC instance if it exists
-        if (WTCInstance != null)
-        {
-            Destroy(WTCInstance);
-            WTCInstance = null; // Reset the instance reference
-        }*/
     }
 
     public void NewGame()
